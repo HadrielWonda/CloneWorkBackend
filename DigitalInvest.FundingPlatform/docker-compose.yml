@@ -1,0 +1,27 @@
+version: '3'
+services:
+  digital-invest-postgres:
+    image: postgres
+    restart: always
+    container_name: digital-invest-postgres
+    volumes:
+      - digital-invest-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  digital-invest-dbeaver:
+    image: dbeaver/cloudbeaver
+    restart: always
+    container_name: digital-invest-dbeaver
+    depends_on:
+      - digital-invest-postgres
+    ports:
+      - 8978:8978
+  
+volumes:
+  digital-invest-data:
+  
